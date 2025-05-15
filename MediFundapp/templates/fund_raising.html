@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fund Information</title>
+</head>
+<body>
+
+    <h2>Raise Fund Information</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <label for="fund_purpose">Fund Purpose:</label><br>
+        <input type="text" id="fund_purpose" name="fund_purpose" value="General" required><br><br>
+
+        <label for="fund_raise_amount">Fund Raise Amount:</label><br>
+        <input type="number" id="fund_raise_amount" name="fund_raise_amount" value="9999999999" required><br><br>
+
+        <label for="fund_title">Fund Title:</label><br>
+        <input type="text" id="fund_title" name="fund_title" value="General" required><br><br>
+
+        <label for="fund_for">Fund For:</label><br>
+        <input type="text" id="fund_for" name="fund_for" value="General" required><br><br>
+
+        <label for="user_qualification">User Qualification:</label><br>
+        <input type="text" id="user_qualification" name="user_qualification" value="General" required><br><br>
+
+        <label for="user_emp_status">Employment Status:</label><br>
+        <input type="text" id="user_emp_status" name="user_emp_status" value="General" required><br><br>
+
+        <label for="how_to_know">How Did You Hear About Us?</label><br>
+        <input type="text" id="how_to_know" name="how_to_know" value="General" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Other Cause Fundraising Form</h2>
+<p><strong>Selected Category:</strong> Other Cause</p>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!-- Hidden input to post the category -->
+  <input type="hidden" name="category" value="other">
+
+  <label>Amount required:</label><input type="number" name="fund_raising_amount">
+  <label>Fund title:</label><input type="text" name="fund_title">
+  <label>For whom:</label>
+  <select name="fund_for">
+    <option value="myself">Myself</option>
+    <option value="family">Family member</option>
+    <option value="friend">Friend</option>
+    <option value="pet">Pet or animal</option>
+    <option value="colleagues">Colleagues</option>
+    <option value="community">Community</option>
+    <option value="other">Other</option>
+  </select>
+  <label>Education qualification:</label><input type="text" name="user_qualification">
+  <label>Employed status:</label><input type="text" name="user_employed_status">
+  <label>How did you hear about us?</label><input type="text" name="how_to_know">
+  <label>Patient story:</label><textarea name="fund_purpose"></textarea>
+  <label>Patient current picture:</label><input type="file" name="attachments">
+  <label>Patient hospital documents:</label><input type="file" name="medical_documents">
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}
