@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #f0f4f8;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  }
+
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+
+  p strong {
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="url"]:focus {
+    border-color: #2980b9;
+    outline: none;
+  }
+
+  button[type="submit"] {
+    margin-top: 25px;
+    background-color: #27ae60;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #1e8449;
+  }
+</style>
+<h2>NGO/Charity Fundraising Form</h2>
+<p><strong>Selected Category:</strong> NGO/Charity</p>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!-- Hidden input to post the category -->
+  <input type="hidden" name="category" value="ngo">
+      <label>Amount required:</label><input type="number" name="fund_raising_amount">
+      <label>Fund title:</label><input type="text" name="fund_title">
+      <label>NGO name:</label><input type="text" name="ngo_name">
+      <label>Registration number:</label><input type="text" name="ngo_registration_number">
+      <label>NGO website:</label><input type="url" name="ngo_website_url">
+      <label>Education qualification:</label><input type="text" name="user_qualification">
+      <label>Employed status:</label><input type="text" name="user_employed_status">
+      <label>How did you hear about us?</label><input type="text" name="how_to_know">
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

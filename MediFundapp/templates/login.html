@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #dfe9f3, #ffffff);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h3 {
+            font-size: 24px;
+            color: #333;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #3367d6;
+        }
+    </style>
+</head>
+<body>
+    <h3>Login</h3>
+    <!-- Load socialaccount_tags -->
+    {% load socialaccount %}
+    <a href="{% provider_login_url 'google' %}">Login with Google</a> 
+</body>    
+</html>
