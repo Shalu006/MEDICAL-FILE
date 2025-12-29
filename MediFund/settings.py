@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'import_export',
+    'rest_framework',
 
     'MediFundapp',
 ]
@@ -54,10 +59,25 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Add this line for AccountMiddleware
+    # 'allauth.account.middleware.AccountMiddleware',
+    
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
+
 ]
 
-SOCIALACCOUNT_PROVIDERS = {}
-
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '629271807890-nbo3h6u344n8entr3a2oaoueodgqf8fq.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
 
 
  
@@ -90,13 +110,13 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
+# AUTHENTICATION_BACKENDS = [
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
+#     # `allauth` specific authentication methods, such as login by email
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
 
 WSGI_APPLICATION = 'MediFund.wsgi.application'
 
@@ -105,7 +125,7 @@ WSGI_APPLICATION = 'MediFund.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'MediFunds', 
+        'NAME': 'MediFund', 
         'USER': 'postgres',   
         'PASSWORD': '123456', 
         'HOST': 'localhost', 
@@ -151,19 +171,23 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "photos",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-SITE_ID = 1
-
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
-)
+]
+
+SITE_ID = 1
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
-
+LOGOUT_REDIRECT_URL = '/login/'

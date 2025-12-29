@@ -1,44 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
     <style>
         body {
             background: linear-gradient(to right, #dfe9f3, #ffffff);
             font-family: 'Segoe UI', sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-        h3 {
-            font-size: 24px;
+
+        .login-box {
+            background: #fff;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-box h3 {
+            margin-bottom: 20px;
             color: #333;
         }
-        .btn {
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #4285F4;
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #4285F4;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background-color: #102a8f;
             color: white;
             border: none;
             border-radius: 6px;
-            font-size: 16px;
-            text-decoration: none;
+            font-size: 15px;
             cursor: pointer;
         }
-        .btn:hover {
+
+        .login-box button:hover {
+            background-color: #0b1c4d;
+        }
+
+        .divider {
+            margin: 18px 0;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .google-btn {
+            display: block;
+            padding: 12px;
+            background-color: #4285F4;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .google-btn:hover {
             background-color: #3367d6;
         }
     </style>
 </head>
+
 <body>
-    <h3>Login</h3>
-    <!-- Load socialaccount_tags -->
-    {% load socialaccount %}
-    <a href="{% provider_login_url 'google' %}">Login with Google</a> 
-</body>    
+
+    <div class="login-box">
+        <h3>Login</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="divider">OR</div>
+
+        {% load socialaccount %}
+        <a href="{% provider_login_url 'google' %}" class="google-btn">
+            Login with Google
+        </a>
+    </div>
+
+</body>
+
 </html>

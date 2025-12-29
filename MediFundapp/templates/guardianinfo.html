@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardian Information</title>
+{% extends 'base.html' %}
+
+{% block title %}Guardian Information{% endblock %}
+
+{% block css %}
 <style>
-    body {
-        background-color: #7d7d7d9d;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
+
+    .container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
     }
 
     fieldset {
-        width: 50%;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 800px;
         margin: auto;
         padding: 20px;
         border: 2px solid black;
@@ -42,44 +40,63 @@
         border-radius: 5px;
     }
 
-    a {
+    .form-btn{
         display: inline-block;
-        justify-content: space-between;
-        padding: 8px 12px;
+        padding: 8px 16px;
         margin-top: 10px;
-        color: #007bff;
-        background-color: #fff;
-        border: none;
+        color: #fff;
+        background-color: #000151;
         text-decoration: none;
         font-weight: bold;
         border-radius: 5px;
-        cursor: pointer;
+        transition: 0.3s;
     }
 
-    a:hover {
-        background-color: #0056b3;
+    .form-btn:hover {
+    background-color: #0056b3;
+    }
+
+
+    @media (max-width: 600px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
     }
     
 </style>
-</head>
-<body>
-   <fieldset>
-       <h2>Guardian Information</h2>
+{% endblock %}
 
-    <form method="post">
-        {% csrf_token %}
+{% block content %}
+<div class="container">
+<fieldset>
 
-       <label for="name">Name:</label>
-       <input type="text" id="name" name="name">
+<h2>Guardian Information</h2>
 
-       <label for="phone">Phone Number:</label>
-       <input type="number" id="phone" name="phone">
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
 
-       <a href="{% url 'patientinfo' %}" id="prevBtn">Prevoius</a>
-       <a href="{% url 'doctorinfo' %}" id="nextBtn">Next Page</a>
-   </fieldset>
-   </form>
+<div class="form-grid">
 
+<div>
+    <label>Name</label>
+    <input type="text" id="name" name="name">
+</div>
+
+<div>
+    <label>Phone Number</label>
+    <input type="number" id="phone" name="phone">
+</div>
+
+<div class="full-width btns">
+    <a href="{% url 'patientinfo' %}" class="form-btn" id="prevBtn">Previous</a>
+    <a href="{% url 'doctorinfo' %}" class="form-btn" id="nextBtn">Next Page</a>
+</div>
+
+</div>
+</form>
+
+</fieldset>
+</div>
 <script>
     function saveData() {
         localStorage.setItem("guardian_name", document.getElementById("name").value);
@@ -99,5 +116,5 @@
         saveData();
     });
 </script>
-</body>
-</html>
+
+{% endblock %}

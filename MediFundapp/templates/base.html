@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,21 +123,27 @@
             display: block;
         }
 
+        nav .logo img {
+            height: 40px;   /* yahin se size control hoga */
+            width: auto;    /* proportion maintain rahe */
+        }
+
+
     </style>
+     {% block css %}{% endblock %}
 </head>
 <body>
     <nav>
         <div class="logo">
           <a href="{% url 'dashboard' %}">
-            <h3 style="font-weight: 100;"> <i> <span>Medi</span><span style="color: cadetblue;">Fund<sup style="color: red;">+</sup></span> </i> </h3>
+            <!-- <h3>Logo</h3> -->
+            <img src="{% static 'logo.webp' %}">
           </a>
         </div>
 
-        <div>
-            <a href="{% url 'fund_raising' %}">Browse Fundraiser</a>
-        </div>
-      
         <ul class="nav-menu">
+            <li><a href="{% url 'fund_raising' %}">Browse Fundraiser</a></li>
+      
             <li class="dropdown">
               <a href="#">Fundraise for ▾</a>
               <ul class="dropdown-content">
@@ -145,7 +152,7 @@
                 <li><a href="{% url 'other_form' %}">Other Cause</a></li>
               </ul>
             </li>
-          </ul>
+        </ul>
           
 
 
@@ -166,3 +173,7 @@
     </footer>
 </body>
 </html>
+
+
+
+ 

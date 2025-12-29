@@ -1,159 +1,167 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Information</title>
+{% extends 'base.html' %}
+
+{% block title %}Patient Information{% endblock %}
+
+{% block css %}
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body {
-        background-color: #7d7d7d9d;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-    }
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-height: 100vh;
-        margin-top: 15%;
-        margin-bottom: 15%;
-    }
-    fieldset {
-        width: 50vw;
-        margin: 20px auto;
-        padding: 10px;
-        border: 2px solid black;
-        border-radius: 7px;
-        background-color: #f9f9f9;
-    }
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
 
-    h1 {
-        text-align: center;
-        color: #333;
-    }
+fieldset {
+    max-width: 800px;
+    width: 100%;
+    padding: 25px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
-    label {
-        margin: 10px 0 5px;
-        font-weight: bold;
-    }
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-    textarea, input {
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 15px; 
-    }
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-    a {
-        display: flex;
-        justify-content: center;
-        padding: 10px 15px;
-        margin-top: 10px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: 16px;
-        cursor: pointer;
-    }
+.form-grid div {
+    display: flex;
+    flex-direction: column;
+}
 
-    a:hover {
-        background-color: #0056b3;
-    }
-    
-    #lead_generate_by, #lead_purpose, #case, #age, #address, #name, #photo, #id, #edu, #occu, #amount, #claim, #admit, #date {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 15px;
-        height: 30px;
-        box-sizing: border-box;
+.form-grid label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
 
-    } 
+.form-grid input,
+.form-grid textarea {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.btn button {
+    padding: 12px;
+    background: #000151;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn button:hover {
+    background: #060f4d;
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
-</head>
-<body>
+{% endblock %}
 
+{% block content %}
 <div class="container">
-    <fieldset>
-        <h1>Patient Information</h1>
-    <form method="post" enctype="multiform/form-data">
-        {% csrf_token %}
-        <label for="lead_generate_by">Lead Generate By:</label>
-        <input type="text" id="lead_generate_by" name="lead_generate_by">
+<fieldset>
 
-        <label for="lead_purpose">Lead Purpose:</label>
-        <input type="text" id="lead_purpose" name="lead_purpose">
+<h1>Patient Information</h1>
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age">
+<div class="form-grid">
 
-        <label for="case">Case:</label>
-        <input type="text" id="case" name="case">
-
-        <label for="id">Id:</label>
-        <input type="file" id="id" name="id" accept="image/*">
-
-        <label for="edu">Education:</label>
-        <input type="text" id="edu" name="edu">
-
-        <label for="occu">Occupation:</label>
-        <input type="text" id="occu" name="occu">
-
-        <label for="amount">Estimate Amount:</label>
-        <input type="number" id="amount" name="amount">
-
-        <label for="date">Estimate Date:</label>
-        <input type="date" id="date" name="date">
-
-        <label for="claim">Claim Amount:</label>
-        <input type="number" id="claim" name="claim">
-
-        <label for="admit">Admit Date:</label>
-        <input type="date" id="admit" name="adimt">
-
-        <label for="address">Address:</label>
-        <textarea id="address" name="address"></textarea>
-
-        <label for="photo">Upload Photo:</label>
-        <input type="file" id="photo" name="photo" accept="image/*">
-
-        <a href="{% url 'guardianinfo' %}">Next Page</a>
-    </fieldset>
-    </form>
+<div>
+    <label>Lead Generate By</label>
+    <input type="text" name="lead_generate_by">
 </div>
-<script>
-    const fields = ["name", "age", "case", "id", "edu", "occu", "amount", "date", "claim", "admit", "address", "photo",];
 
-    fields.forEach(field => {
-        let savedValue = localStorage.getItem(field);
-        if (savedValue) {
-            document.getElementById(field).value = savedValue;
-        }
-     });
+<div>
+    <label>Lead Purpose</label>
+    <input type="text" name="lead_purpose">
+</div>
 
-    fields.forEach(field => {
-        document.getElementById(field).addEventListener("input", function () {
-            localStorage.setItem(field, this.value);
-        });
-    });
-</script>
+<div>
+    <label>Name</label>
+    <input type="text" name="name">
+</div>
 
-</body>
-</html>
+<div>
+    <label>Age</label>
+    <input type="number" name="age">
+</div>
+
+<div>
+    <label>Case</label>
+    <input type="text" name="case">
+</div>
+
+<div>
+    <label>ID Proof</label>
+    <input type="file" name="id">
+</div>
+
+<div>
+    <label>Education</label>
+    <input type="text" name="edu">
+</div>
+
+<div>
+    <label>Occupation</label>
+    <input type="text" name="occu">
+</div>
+
+<div>
+    <label>Estimate Amount</label>
+    <input type="number" name="amount">
+</div>
+
+<div>
+    <label>Estimate Date</label>
+    <input type="date" name="date">
+</div>
+
+<div>
+    <label>Claim Amount</label>
+    <input type="number" name="claim">
+</div>
+
+<div>
+    <label>Admit Date</label>
+    <input type="date" name="admit">
+</div>
+
+<div class="full-width">
+    <label>Address</label>
+    <textarea name="address" rows="3"></textarea>
+</div>
+
+<div class="full-width">
+    <label>Upload Photo</label>
+    <input type="file" name="photo">
+</div>
+
+<div class="full-width btn">
+    <button type="submit">Next Page</button>
+</div>
+
+</div>
+</form>
+
+</fieldset>
+</div>
+{% endblock %}
 
