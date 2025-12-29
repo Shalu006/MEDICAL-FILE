@@ -1,0 +1,15 @@
+# Environment variables
+.env
+
+# Django secrets
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Database
+db.sqlite3
+
+# VS Code
+.vscode/
