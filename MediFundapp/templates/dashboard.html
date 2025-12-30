@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Lead Form{% endblock %}
 
 {% block content %}
@@ -60,19 +62,19 @@
         
         <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 30px;">
             <div style="width: 80%; max-width: 400px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <img src="https://via.placeholder.com/80" alt="Step 1" style="margin-bottom: 15px;">
+                <img src="{% static 'image1.svg' %}" alt="Step 1" style="margin-bottom: 15px; width: 80px; height: auto">
                 <h3 style="color: #000151; font-size: 22px;">Step 1: Create</h3>
                 <p style="color: #555;">Set up your fundraiser by filling in the details about your cause.</p>
             </div>
     
             <div style="width: 80%; max-width: 400px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <img src="https://via.placeholder.com/80" alt="Step 2" style="margin-bottom: 15px;">
+                <img src="{% static 'image2.svg' %}" alt="Step 2" style="margin-bottom: 15px; width: 80px; height: auto">
                 <h3 style="color: #000151; font-size: 22px;">Step 2: Share</h3>
                 <p style="color: #555;">Share your fundraiser with family, friends, and social media.</p>
             </div>
     
             <div style="width: 80%; max-width: 400px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <img src="https://via.placeholder.com/80" alt="Step 3" style="margin-bottom: 15px;">
+                <img src="{% static 'image3.png' %}" alt="Step 3" style="margin-bottom: 15px; width: 80px; height: auto">
                 <h3 style="color: #000151; font-size: 22px;">Step 3: Receive</h3>
                 <p style="color: #555;">Get donations quickly and withdraw funds as needed.</p>
             </div>
